@@ -30,7 +30,16 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    if (num % (15) == 0){
+        return 'FizzBuzz'
+    } else if(num % 5 == 0){
+        return 'Buzz'
+    } else if (num % 3 == 0 ){
+        return 'Fizz'
+    } else {
+        return num
+    }
 }
 
 
@@ -46,7 +55,7 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    return n ? n * getFactorial(n - 1) : 1
 }
 
 
@@ -63,7 +72,12 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    var sum = 0
+    for (var i=n1; i<=n2; i++){
+        sum+=i
+    }
+    return sum
 }
 
 
@@ -82,7 +96,10 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    var max = Math.max(a,b,c)    
+    var dif = (a+b+c)-max
+    return (dif<=max)? false: true
 }
 
 
@@ -192,7 +209,16 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    if (isStartIncluded == true && isEndIncluded == true){
+        return `[${Math.min(a, b)}, ${Math.max(a, b)}]`
+    } else if (isStartIncluded == true && isEndIncluded !== true){
+        return `[${Math.min(a, b)}, ${Math.max(a, b)})`
+    } else if(isStartIncluded !== true && isEndIncluded == true){
+        return `(${Math.min(a, b)}, ${Math.max(a, b)}]`
+    } else {
+        return `(${Math.min(a, b)}, ${Math.max(a, b)})`
+    }
 }
 
 
@@ -209,7 +235,11 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    var arr = str.split('')
+    var r =arr.reverse()
+    var j = r.join('')    
+    return j
 }
 
 
@@ -226,7 +256,12 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    var s = num.toString()
+    var a = s.split('')
+    var r = a.reverse()
+    var j = r.join('')
+    return j
 }
 
 
@@ -270,7 +305,12 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    while (num>9){
+        num=num.toString().split('').reduce((sum, val) => (sum + val*1), 0)   
+      } 
+      return num
+      
 }
 
 
@@ -296,7 +336,67 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    var stack = [];    
+  var len = str.length;
+  var config7 = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']];
+
+  function isOpen (openBracket){
+    for (var op = 0; op < config7.length; op++) {
+      if (config7[op][0] === openBracket) {
+        return true;
+      }
+    }
+    return false;  
+  }
+  function isSame(openCloseBracket){
+    var same = [['|', '|'], ['7', '7'], ['8', '8']];
+    for (var ocb = 0; ocb<same.length; ocb++){
+      if (same[ocb][0] === openCloseBracket){
+        return true;
+      }
+    }
+    return false;
+  }
+  function isMatch(lastOfStack, closeBracket) {
+    for (var match = 0; match < config7.length; match++) {
+      if (config7[match][0] === lastOfStack && config7[match][1] === closeBracket) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  for (var i = 0; i < len; i++) {
+    var br=str[i];
+    if (isSame(br)) {    
+      if (stack.length == 0){
+        stack.push(br);
+      } else {
+        var lastElement = stack.pop();
+        if (!isMatch(lastElement, br)) {
+          stack.push(lastElement, br);
+        } else {        
+          if (isMatch(lastElement, br)) {
+            continue;
+          }          
+        }
+      }
+    } else if (isOpen(br) && !isSame(br)) {      
+      stack.push(br);
+    } else {
+      if (stack.length == 0) { 
+        return false;
+      }
+      var lastElement = stack.pop();    
+      if (!isMatch(lastElement, br)) {      
+        return false;
+      }    
+    }  
+  }
+
+  var result = stack.length == 0 ? true : false;
+  return(result);
 }
 
 
@@ -356,7 +456,8 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    return num.toString(n)
 }
 
 
